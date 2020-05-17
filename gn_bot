@@ -1,33 +1,262 @@
 // ==UserScript==
-// @name         Duke_Grant's GN Bot
+// @name         GN Bot
 // @namespace    http://tampermonkey.net/
-// @version      alpha 1.0
-// @description  The script that will (maybe) allow user to earn a lot of money on GN without sitting here 24/7.
+// @version      1.0
+// @description  The script that allows user to earn a lot of money on GN without sitting here 24/7.
 // @author       Duke_Grant
-// @match        https://www.gangsternation.net/main/small
+// @include      https://www.gangsternation.net/main/welcome
+// @include      https://www.gangsternation.net/main/overview
+// @include      https://www.gangsternation.net/main/credits
+// @include      https://www.gangsternation.net/main/online
+// @include      https://www.gangsternation.net/main/insurance
+// @include      https://www.gangsternation.net/main/inventory
+// @include      https://www.gangsternation.net/main/small
+// @include      https://www.gangsternation.net/main/vehicletheft
+// @include      https://www.gangsternation.net/main/extortion
+// @include      https://www.gangsternation.net/main/prison
+// @include      https://www.gangsternation.net/main/fraud
+// @include      https://www.gangsternation.net/main/chase
+// @include      https://www.gangsternation.net/main/bomb
+// @include      https://www.gangsternation.net/main/safe
+// @include      https://www.gangsternation.net/main/armed
+// @include      https://www.gangsternation.net/main/missions
+// @include      https://www.gangsternation.net/main/airport
+// @include      https://www.gangsternation.net/main/garage
+// @include      https://www.gangsternation.net/main/mentoring
+// @include      https://www.gangsternation.net/main/bullets
+// @include      https://www.gangsternation.net/main/bank
+// @include      https://www.gangsternation.net/main/auctions
+// @include      https://www.gangsternation.net/main/stocks
+// @include      https://www.gangsternation.net/main/blackmarket
+// @include      https://www.gangsternation.net/main/slots
+// @include      https://www.gangsternation.net/main/scratch
+// @include      https://www.gangsternation.net/main/roulette
+// @include      https://www.gangsternation.net/main/blackjack
+// @include      https://www.gangsternation.net/main/lotto
+// @include      https://www.gangsternation.net/main/rps
+// @include      https://www.gangsternation.net/main/heist
+// @include      https://www.gangsternation.net/main/bankrobbery
+// @include      https://www.gangsternation.net/main/openfire
+// @include      https://www.gangsternation.net/main/detectives
+// @include      https://www.gangsternation.net/main/bounties
+// @include      https://www.gangsternation.net/main/verifykill
+// @include      https://www.gangsternation.net/main/families
+// @include      https://www.gangsternation.net/main/family/dashboard
+// @include      https://www.gangsternation.net/main/family/members
+// @include      https://www.gangsternation.net/main/family/banking
+// @include      https://www.gangsternation.net/main/family/garage
+// @include      https://www.gangsternation.net/main/family/business
+// @include      https://www.gangsternation.net/main/family/alerts
+// @include      https://www.gangsternation.net/main/find
+// @include      https://www.gangsternation.net/main/respect
+// @include      https://www.gangsternation.net/main/friends
+// @include      https://www.gangsternation.net/main/times
+// @include      https://www.gangsternation.net/main/challenges
+// @include      https://www.gangsternation.net/main/preferences
+// @include      https://www.gangsternation.net/main/help
+// @include      https://www.gangsternation.net/main/statistics
+// @include      https://www.gangsternation.net/main/suicide
+// @include      https://www.gangsternation.net/main/notepad
+// @include      https://www.gangsternation.net/main/updates
 // @grant        none
 // ==/UserScript==
 
 'use strict';
 window.onload = function gnbot() // The global bot function, launches after complete page load.
 {
-    console.log("GN Bot v. alpha 1.0");
+    console.log("GN Bot v.1.0");
     console.log("Made by Duke_Grant");
     setInterval(
-        function check() // Checks if player is in a cell and if jobs on Crime Scene are available.
+        function check()
         {
             loop:
             {
+                if(document.querySelector("#header-stats > div.character.indented > div.prison").className == "prison")
+                {
+                    var bribe_button = document.querySelector("#content > gn-page > div > div > div.page-prison > div > button");
+                    bribe_button.click();
+                    console.log("GN Bot: Bribed from prison");
+                }
                 if(document.querySelector("#header-stats > a.money.indented > div.inner > table > tbody > tr:nth-child(1) > td:nth-child(2)").getAttribute('title') !== '$0')
                 {
+                    var welcome_page = document.querySelector("#container > gn-left > div > div.top > a");
+                    welcome_page.click();
                     var bank_page = document.querySelector("#container > gn-left > div > div.menu > section:nth-child(3) > a.bank");
                     bank_page.click();
                     var bank_deposit = document.querySelector("#page-bank-account > div.content-general.page-top-spacer > div.account-inner.box-outline.actions > form > button:nth-child(3)");
                     bank_deposit.click();
-                    console.log("GN Bot: Made a deposit of all money.")
+                    console.log("GN Bot: Made a deposit of all money.");
                     break loop;
                 }
-                if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a").className == "small highlight")
+                if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.armed").className == "armed highlight")
+                {
+                    var bank_page2 = document.querySelector("#container > gn-left > div > div.menu > section:nth-child(3) > a.bank");
+                    bank_page2.click();
+                    var bank_withdraw36 = document.querySelector("#page-bank-account > div.page-split > div:nth-child(2) > form > div:nth-child(3) > button");
+                    bank_withdraw36.click();
+                    var ar_page = document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.armed.highlight");
+                    ar_page.click();
+                    var ar_weapon = document.querySelector("#page-armed-attempt > div:nth-child(2) > div > button:nth-child(4)");
+                    ar_weapon.click();
+                    var ar = document.querySelector("#page-armed-attempt > div:nth-child(3) > div > button:nth-child(5) > div.lockable-unlocked");
+                    ar.click();
+                    console.log("GN Bot: Tried to do Armed Robbery.");
+                    break loop;
+                }
+                if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.bomb").className == "bomb highlight")
+                {
+                    var bd_page = document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.bomb.highlight");
+                    bd_page.click();
+                    var wire1_button = document.querySelector("#page-bomb-attempt > div.bomb > button:nth-child(1)");
+                    var wire2_button = document.querySelector("#page-bomb-attempt > div.bomb > button:nth-child(2)");
+                    var wire3_button = document.querySelector("#page-bomb-attempt > div.bomb > button:nth-child(3)");
+                    var wire4_button = document.querySelector("#page-bomb-attempt > div.bomb > button:nth-child(4)");
+                    var wires = Array(1, 2, 3, 4);
+                    var wire1 = wires[Math.floor(Math.random() * wires.length)];
+                    var index = wires.indexOf(wire1);
+                    if (index > -1)
+                    {
+                        wires.splice(index, 1);
+                    }
+                    var wire2 = wires[Math.floor(Math.random() * wires.length)];
+                    index = wires.indexOf(wire2);
+                    if (index > -1)
+                    {
+                        wires.splice(index, 1);
+                    }
+                    var wire3 = wires[Math.floor(Math.random() * wires.length)];
+                    index = wires.indexOf(wire3);
+                    if (index > -1)
+                    {
+                        wires.splice(index, 1);
+                    }
+                    var wire4 = wires[Math.floor(Math.random() * wires.length)];
+                    if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.bomb").className == "bomb highlight")
+                    {
+                        switch (wire1)
+                        {
+                            case 1:
+                                wire1_button.click();
+                                console.log("GN Bot: Cut the blue wire.");
+                                break;
+                            case 2:
+                                wire2_button.click();
+                                console.log("GN Bot: Cut the red wire.");
+                                break;
+                            case 3:
+                                wire3_button.click();
+                                console.log("GN Bot: Cut the yellow wire.");
+                                break;
+                            case 4:
+                                wire4_button.click();
+                                console.log("GN Bot: Cut the green wire.");
+                                break;
+                        }
+                    }
+                    if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.bomb").className == "bomb highlight")
+                    {
+                        switch(wire2)
+                        {
+                            case 1:
+                                wire1_button.click();
+                                console.log("GN Bot: Cut the blue wire.");
+                                break;
+                            case 2:
+                                wire2_button.click();
+                                console.log("GN Bot: Cut the red wire.");
+                                break;
+                            case 3:
+                                wire3_button.click();
+                                console.log("GN Bot: Cut the yellow wire.");
+                                break;
+                            case 4:
+                                wire4_button.click();
+                                console.log("GN Bot: Cut the green wire.");
+                                break;
+                        }
+                    }
+                    if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.bomb").className == "bomb highlight")
+                    {
+                        switch(wire3){
+                            case 1:
+                                wire1_button.click();
+                                console.log("GN Bot: Cut the blue wire.");
+                                break;
+                            case 2:
+                                wire2_button.click();
+                                console.log("GN Bot: Cut the red wire.");
+                                break;
+                            case 3:
+                                wire3_button.click();
+                                console.log("GN Bot: Cut the yellow wire.");
+                                break;
+                            case 4:
+                                wire4_button.click();
+                                console.log("GN Bot: Cut the green wire.");
+                                break;
+                        }
+                    }
+                    if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.bomb").className == "bomb highlight")
+                    {
+                        switch(wire4){
+                            case 1:
+                                wire1_button.click();
+                                console.log("GN Bot: Cut the blue wire.");
+                                break;
+                            case 2:
+                                wire2_button.click();
+                                console.log("GN Bot: Cut the red wire.");
+                                break;
+                            case 3:
+                                wire3_button.click();
+                                console.log("GN Bot: Cut the yellow wire.");
+                                break;
+                            case 4:
+                                wire4_button.click();
+                                console.log("GN Bot: Cut the green wire.");
+                                break;
+                        }
+                    }
+                    break loop;
+                }
+                if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.chase").className == "chase highlight")
+                {
+                    var chase_page = document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.chase.highlight");
+                    chase_page.click();
+                    var chase_left = document.querySelector("#page-chase-attempt > div.controls > div > button.left");
+                    var chase_forward = document.querySelector("#page-chase-attempt > div.controls > div > button.forward");
+                    var chase_right = document.querySelector("#page-chase-attempt > div.controls > div > button.right");
+                    var chase_uturn = document.querySelector("#page-chase-attempt > div.controls > div > button.uturn");
+                    choosedir:
+                    {
+                        if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.chase").className == "chase highlight")
+                        {
+                            var directions = Array(1, 2, 3, 4);
+                            var direction = directions[Math.floor(Math.random() * directions.length)];
+                            switch(direction)
+                            {
+                                case 1:
+                                    chase_forward.click();
+                                    console.log("GN Bot: Forward on chase.")
+                                    break choosedir;
+                                case 2:
+                                    chase_left.click();
+                                    console.log("GN Bot: Left on chase.")
+                                    break choosedir;
+                                case 3:
+                                    chase_right.click();
+                                    console.log("GN Bot: Right on chase.")
+                                    break choosedir;
+                                case 4:
+                                    chase_uturn.click()
+                                    console.log("GN Bot: U-turn on chase.")
+                                    break choosedir;
+                            }
+                        }
+                    }
+                    break loop;
+                }
+                if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.small").className == "small highlight")
                 {
                     var sc_page = document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.small.highlight");
                     sc_page.click();
@@ -43,6 +272,55 @@ window.onload = function gnbot() // The global bot function, launches after comp
                     var vt = document.querySelector("#page-vehicletheft-attempt > div.content-general > div.vehicles > button:nth-child(1)");
                     vt.click();
                     console.log("GN Bot: Tried to do Vehicle Theft.")
+                    break loop;
+                }
+                prison:
+                if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.prison").className == "prison highlight")
+                {
+                    var prison_page = document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.prison.highlight");
+                    prison_page.click();
+                    var prison_try = document.querySelector("#page-prison-busting > div.content-general > div.prisoners > button:nth-child(1)");
+                    prison_try.click();
+                    if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.prison").className == "prison highlight")
+                    {
+                        break prison;
+                    }
+                    break loop;
+                }
+                if(document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.extortion").className == "extortion highlight")
+                {
+                    var extortion_page = document.querySelector("#container > gn-left > div > div.menu > section:nth-child(2) > a.extortion.highlight");
+                    extortion_page.click();
+                    var target1 = document.querySelector("#page-extortion-attempt > div.content-general > div > button:nth-child(1)");
+                    var target2 = document.querySelector("#page-extortion-attempt > div.content-general > div > button:nth-child(2)");
+                    var target3 = document.querySelector("#page-extortion-attempt > div.content-general > div > button:nth-child(3)");
+                    var target4 = document.querySelector("#page-extortion-attempt > div.content-general > div > button:nth-child(4)");
+                    var target5 = document.querySelector("#page-extortion-attempt > div.content-general > div > button:nth-child(5)");
+                    var target6 = document.querySelector("#page-extortion-attempt > div.content-general > div > button:nth-child(6)");
+                    var targets = Array(1, 2, 3, 4, 5, 6);
+                    var target = targets[Math.floor(Math.random() * targets.length)];
+                    switch(target)
+                    {
+                        case 1:
+                            target1.click();
+                            break;
+                        case 2:
+                            target2.click();
+                            break;
+                        case 3:
+                            target3.click();
+                            break;
+                        case 4:
+                            target4.click();
+                            break;
+                        case 5:
+                            target5.click();
+                            break;
+                        case 6:
+                            target6.click();
+                            break;
+                    }
+                    console.log("GN Bot: Tried to do Extortion.");
                     break loop;
                 }
             }
